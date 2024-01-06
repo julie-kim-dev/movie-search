@@ -1,3 +1,7 @@
+const apiKey = '677469743fc0a44ffff6d04b1af8f636'; // 내가 요청해서 받아온 고유 API
+const urlImg = 'https://image.tmdb.org/t/p/w500'; // 이미지 주소의 베이스가 되는 앞부분
+
+
 const options = {
     method: 'GET',
     headers: {
@@ -6,7 +10,47 @@ const options = {
     }
 };
 
-fetch('https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1', options)
-    .then(response => response.json())
-    .then(response => console.log(response))
-    .catch(err => console.error(err));
+fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
+    .then(response => response.json()) // 호출된 url에서 json 데이터를 검색하고 메서드를 사용하여 json으로 구문 분석
+    .then(data => {
+        console.log(data) // 키값 확인
+        const movies = data.results;
+        const movieContainer = document.querySelector('.movieContainer'); // DOM 요소 접근 시작
+
+        movies.forEach(movie => { // forEach로 한번씩 호출하여 순회를 반복하면 영화 카드를 하나씩 가져오는 리스트가 된다
+
+            // 영화 카드 한 개의 단위를 감싸는 div
+            const movieCard = document.createElement('div'); // 자바스크립트에서 html 요소 생성(요소의 태그이름을 매개변수로 받음)
+            movieCard.classList.add('movieCard'); // 요소마다 클래스 붙여서 구분
+
+            // 영화 포스터 이미지
+            const movieImg = document.createElement('img');
+            movieImg.classList.add('movieImg');
+            movieImg.src = `${urlImg}${movie.poster_path}`;
+            movieImg.alt = movie.title; 
+
+            // 영화 제목
+            const movieTitle = document.createElement('div');
+            movieTitle.classList.add('movieTitle');
+            movieTitle.innerText = movie.title; // DOM 요소로 접근하여 자바스크립트 내에서 html 텍스트 삽입
+
+            // 영화 줄거리 요약
+            const movieOverview = document.createElement('div');
+            movieOverview.classList.add('movieOverview');
+            movieOverview.innerText = movie.overview; // 10점만점 단위 보여주기
+
+            // 영화 평점
+            const movieVoteAverage = document.createElement('div');
+            movieVoteAverage.classList.add('movieVoteAverage');
+            movieVoteAverage.innerText = `${movie.vote_average} / 10`; // 10점만점 단위 보여주기
+
+            // div 닫아줌
+            movieCard.appendChild(movieImg); 
+            movieCard.appendChild(movieTitle); 
+            movieCard.appendChild(movieOverview);
+            movieCard.appendChild(movieVoteAverage); 
+            movieContainer.appendChild(movieCard);
+            movieContainer.appendChild(movieImg,movieTitle,movieOverview,movieVoteAverage);
+        })
+    })
+    .catch(err => console.error(err)); // 가져오는 동안 오류가 발생하면 해당 catch() 메서드가 오류 메시지를 콘솔에 기록

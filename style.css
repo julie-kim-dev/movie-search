@@ -56,15 +56,15 @@ body {
 .headerLogo {
     text-align: center;
 }
-.searchContainer {
+#searchForm {
     text-align: right;
     margin-right: 100px;
 }
-.searchContainer input {
+#searchForm input {
     padding: 6px 12px;
     margin-right: 5px;
 }
-.searchContainer input-placeholder {
+#searchForm input-placeholder {
     color: grey;
 }
 

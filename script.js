@@ -1,5 +1,8 @@
 const apiKey = '677469743fc0a44ffff6d04b1af8f636'; // 내가 요청해서 받아온 고유 API
 const urlImg = 'https://image.tmdb.org/t/p/w500'; // 이미지 주소의 베이스가 되는 앞부분
+const urlSearch = 'https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1';
+// const form = document.querySelector(form);
+const search = document.getElementById('searchInput');
 
 
 const options = {
@@ -17,7 +20,7 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', opti
         const movies = data.results;
         const movieContainer = document.querySelector('.movieContainer'); // DOM 요소 접근 시작
 
-        movies.forEach(movie => { // forEach로 한번씩 호출하여 순회를 반복하면 영화 카드를 하나씩 가져오는 리스트가 된다
+        movies.forEach(movie => { // forEach로 한번씩 호출하여 순회를 반복하면 영화 카드를 하나씩 가져오는 리스트(새로운 배열로 반환)가 된다 근데 여기서부터 코드가 반복되는 패턴같은게 있는것같아서 일단제출하고 백틱 사용해서 리팩토링 시도
 
             // 영화 카드 한 개의 단위를 감싸는 div
             const movieCard = document.createElement('div'); // 자바스크립트에서 html 요소 생성(요소의 태그이름을 매개변수로 받음)
@@ -50,7 +53,50 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', opti
             movieCard.appendChild(movieOverview);
             movieCard.appendChild(movieVoteAverage); 
             movieContainer.appendChild(movieCard);
-            movieContainer.appendChild(movieImg,movieTitle,movieOverview,movieVoteAverage);
         })
+        // ~인기영화 데이터 연결
+
+        for (let i = 0; i < response.results.length; i++) {
+            document.querySelectorAll('.movieTitle')[i].innerText =
+                response.results[i].title;
+            }
+            
+            function searchFilter(data, search) {
+                return data.filter((d) => d.title.includes(search));
+            }
+            
+            function search() {
+                let text = document.getElementById('input').value;
+                let res = searchFilter(response.results, text);
+            
+                document.getElementById('movies').innerHTML = '';
+            
+                res.forEach((movie) => {
+                let template = `<div class="movie">
+                                    <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="" />
+                                    <h2 class="movieName">${movie.title}</h2>
+                                    <p class="movieSum">${movie.overview}</p>
+                                    <p class="movieRate">평점 ${movie.vote_average}</p>
+                                    
+                                </div>`;
+            
+                document.querySelector('#movies').insertAdjacentHTML('beforeend', template);
+                });
+            }
+            
+            document.getElementById('btn').addEventListener('click', search);
+        
+
+        
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+
+        const searchMovie = () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            const searchTitle = movies.filter(search => search.movieTitle.toLowerCase().includes(searchTerm)) // filter : 배열의 모든요소에 콜백함수실행하고 결과가 true인 것만 새로운 배열로 반환
+        }
+        searchBtn.addEventListener('click', searchMovie)
+        // ~영화 검색
     })
     .catch(err => console.error(err)); // 가져오는 동안 오류가 발생하면 해당 catch() 메서드가 오류 메시지를 콘솔에 기록
+

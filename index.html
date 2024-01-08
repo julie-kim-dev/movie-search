@@ -12,31 +12,20 @@
     <div class="wrap">
         <header>
             <div class="innerHeader">
-                <h1 class="headerLogo"><a href=""><img src="./img/nbc logo_red.png" alt="header logo img"></a></h1>
-                <form class="searchInput">
-                    <input type="text" id="search" placeholder="영화 제목을 입력하세요">
-                    <button type="button" class="btn btn-danger">검색</button>
+                <h1 class="headerLogo"><a href="index.html"><img src="./img/nbc logo_red.png" alt="NBC Movie List"></a></h1>
+                <form id="searchForm">
+                    <input type="text" id="searchInput" placeholder="영화 제목을 입력하세요">
+                    <button type="submit" id="searchBtn" class="btn btn-danger">검색</button>
                 </form>
             </div>
         </header>
         <!-- main -->
-        <div class="main">
+        <section class="main">
             <div class="movieContainer"></div>
-            <!-- <div class="myCards">
-                <div class="row row-cols-1 row-cols-md-4 g-4">
-                    <div class="col" id="">
-                        <div class="card h-100">
-                            <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-score">8</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-        </div>
+        </section>
+        <!-- <div class="searchResultContainer">
+            <div class="searchResult"></div>
+        </div> -->
         <footer>
         </footer>
     </div>

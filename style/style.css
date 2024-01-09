@@ -1,0 +1,62 @@
+body {
+    background-color: #ffe3e9;
+}
+
+/* header */
+.innerHeader {
+	width: 1200px;
+	margin: 0 auto 100px;
+}
+.headerLogo {
+    text-align: center;
+}
+#searchForm {
+    text-align: right;
+    margin-right: 100px;
+}
+#searchForm input {
+    padding: 6px 12px;
+    margin-right: 5px;
+}
+#searchForm input-placeholder {
+    color: grey;
+}
+
+/* main */
+.movieContainer {
+	width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+.movieCard {
+	width: 30%;
+	overflow: hidden;
+	margin: 40px 0;
+}
+.movieImg {
+	max-width: 100%; /* 이미지 크기 div에 맞춰서 자동 조절 */
+	height: auto;
+	display: block;
+	border-radius: 10px;
+}
+.movieTitle {
+	height: 60px;
+	font-size: 30px;
+	font-weight: bold;
+	margin: 15px 0;
+	line-height: 35px;
+}
+.movieOverview {
+	height: 120px;
+	line-height: 25px;
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+.movieVoteAverage {
+	font-size: 20px;
+	font-weight: bold;
+	color: #cd5333;
+	text-align: right;
+}

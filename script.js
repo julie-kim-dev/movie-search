@@ -47,6 +47,8 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', opti
             movieVoteAverage.classList.add('movieVoteAverage');
             movieVoteAverage.innerText = `${movie.vote_average} / 10`; // 10점만점 단위 보여주기
 
+            // const movieId = window.alert();
+
             // div 닫아줌
             movieCard.appendChild(movieImg); 
             movieCard.appendChild(movieTitle); 
@@ -56,6 +58,21 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', opti
         })
         // ~인기영화 데이터 연결
 
+        // alert id값 띄우기
+        movieContainer.addEventListener("click", handleClickCard);
+
+        // 이벤트 위임
+        function handleClickCard(event) {
+            // 카드 외 영역 클릭 시 무시
+            if (event.target === movieContainer) return;
+
+            if (event.target.matches(".movieCard")) {
+                alert(`영화 id : ${event.target.id}`) // id 위에서 불러와야되는데 어디에...
+            }
+        }
+
+
+        // 영화 검색~
         for (let i = 0; i < response.results.length; i++) {
             document.querySelectorAll('.movieTitle')[i].innerText =
                 response.results[i].title;

@@ -1,4 +1,4 @@
-const apiKey = '677469743fc0a44ffff6d04b1af8f636'; // 내가 요청해서 받아온 고유 API
+// const apiKey = ''; // 내가 요청해서 받아온 고유 API
 const urlImg = 'https://image.tmdb.org/t/p/w500'; // 이미지 주소의 베이스가 되는 앞부분
 const urlSearch = 'https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1';
 // const form = document.querySelector(form);
